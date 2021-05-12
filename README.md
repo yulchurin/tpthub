@@ -42,9 +42,9 @@ function task2()
 
     return $url;
 }
+```
 
 *****
-```
 
 ### TASK 3 ###
 ##### Sol:

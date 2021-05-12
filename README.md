@@ -1,51 +1,20 @@
 # pencil-soft
 
 ### TASK 1 ###
-
-Имеется база со следующими таблицами:
-CREATE TABLE `users` (
-    `id`         INT(11) NOT NULL AUTO_INCREMENT,
-    `name`       VARCHAR(255) DEFAULT NULL,
-    `gender`     INT(11) NOT NULL COMMENT '0 - не указан, 1 - мужчина, 2 -
-женщина.',
-    `birth_date` INT(11) NOT NULL COMMENT 'Дата в unixtime.',
-    PRIMARY KEY (`id`)
-);
-CREATE TABLE `phone_numbers` (
-    `id`      INT(11) NOT NULL AUTO_INCREMENT,
-    `user_id` INT(11) NOT NULL,
-    `phone`   VARCHAR(255) DEFAULT NULL,
-    PRIMARY KEY (`id`)
-);
-Напишите запрос, возвращающий имя и число указанных телефонных номеров девушек в возрасте от
-18 до 22 лет.
-Оптимизируйте таблицы и запрос при необходимости.
-
-# Sol:
-
+##### Sol:
+```
 SELECT users.name, count(phone_numbers.phone) AS phone_nums
 FROM users
 LEFT JOIN phone_numbers
 ON users.id = phone_numbers.user_id
 WHERE TIMESTAMPDIFF(YEAR, FROM_UNIXTIME(users.birth_date), NOW()) BETWEEN 18 AND 22
-
+```
 *****
 
 ### TASK 2 ###
+##### Sol:
 
-Имеется строка:
-https://www.somehost.com/test/index.html?param1=4&amp;param2=3&amp;param3=2&amp;param4=1&amp;param5=3
-Напишите функцию, которая:
-1. удалит параметры со значением “3”;
-2. отсортирует параметры по значению;
-3. добавит параметр url со значением из переданной ссылки без параметров (в примере:
-/test/index.html);
-4. сформирует и вернёт валидный URL на корень указанного в ссылке хоста.
-В указанном примере функцией должно быть возвращено:
-https://www.somehost.com/?param4=1&amp;param3=2&amp;param1=4&amp;url=%2Ftest%2Findex.html
-
-# Sol:
-
+```
 /**
  * task 2
  */
@@ -75,11 +44,11 @@ function task2()
 }
 
 *****
+```
 
 ### TASK 3 ###
-
-# Sol:
-
+##### Sol:
+```
 Class User
 {
     /**
@@ -143,14 +112,13 @@ Class PostController
     }
 
 }
-
+```
 
 ***
 
 ### TASK 4 ###
-
-# Sol:
-
+##### Sol:
+```
 function load_users_data($user_ids)
 {
     $db_host       = 'localhost';
@@ -185,9 +153,9 @@ $data = load_users_data($_GET['user_ids']);
 foreach ($data as $user_id => $name) {
     echo "<a href=\"/show_user.php?id=$user_id\">$name</a>";
 }
-
-1. Исходный вариант уязвим к SQL-инъекциям
-2. Выполнение запросов в цикле - плохая практика
+```
+* Исходный вариант уязвим к SQL-инъекциям
+* Выполнение запросов в цикле - плохая практика
 
 
 
